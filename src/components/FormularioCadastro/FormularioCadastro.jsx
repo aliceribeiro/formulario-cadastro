@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@material-ui/core";
 
-function FormularioCadastro({ aoEnviar }) {
+function FormularioCadastro({ aoEnviar, validarCPF }) {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
   const [promocoes, setPromocoes] = useState(true);
   const [novidades, setNovidades] = useState(true);
+  const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
 
   return (
     <form
@@ -47,6 +48,12 @@ function FormularioCadastro({ aoEnviar }) {
         variant="outlined"
         margin="normal"
         fullWidth
+        onBlur={(event) => {
+          const ehValido = validarCPF(event.target.value);
+          setErros({ cpf: ehValido });
+        }}
+        error={!erros.cpf.valido}
+        helperText={erros.cpf.texto}
       />
 
       <FormControlLabel
