@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Typography } from "@material-ui/core";
 import DadosEntrega from "./DadosEntrega";
 import DadosPessoais from "./DadosPessoais";
 import DadosUsuario from "./DadosUsuario";
@@ -8,7 +9,7 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
   const [dadosColetados, setDadosColetados] = useState({});
 
   useEffect(() => {
-    if (etapaAtual === formularios.length) {
+    if (etapaAtual === formularios.length - 1) {
       aoEnviar(dadosColetados);
     }
   });
@@ -17,6 +18,7 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
     <DadosUsuario aoEnviar={coletarDados} />,
     <DadosPessoais aoEnviar={coletarDados} validarCPF={validarCPF} />,
     <DadosEntrega aoEnviar={coletarDados} />,
+    <Typography variant="h5">Obrigado pelo cadastro!</Typography>,
   ];
 
   function coletarDados(dados) {
