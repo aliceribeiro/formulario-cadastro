@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Typography } from "@material-ui/core";
+import { Step, StepLabel, Stepper, Typography } from "@material-ui/core";
 import DadosEntrega from "./DadosEntrega";
 import DadosPessoais from "./DadosPessoais";
 import DadosUsuario from "./DadosUsuario";
@@ -30,7 +30,25 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
     setEtapaAtual(etapaAtual + 1);
   }
 
-  return <>{formularios[etapaAtual]}</>;
+  return (
+    <>
+      <Stepper activeStep={etapaAtual}>
+        <Step>
+          <StepLabel>Login</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Pessoal</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Entrega</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Finalização</StepLabel>
+        </Step>
+      </Stepper>
+      {formularios[etapaAtual]}
+    </>
+  );
 }
 
 export default FormularioCadastro;
